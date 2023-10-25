@@ -1,0 +1,7 @@
+====================
+Модуль generation.py
+====================
+
+.. automodule:: polygon_package.generation
+   :members:
+

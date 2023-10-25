@@ -1,0 +1,11 @@
+========================
+Модуль transformation.py
+========================
+
+.. automodule:: polygon_package.transformation
+   :members:
+
+
+
+
+

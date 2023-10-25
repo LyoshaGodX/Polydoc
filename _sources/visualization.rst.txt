@@ -1,0 +1,12 @@
+=======================
+Модуль visualization.py
+=======================
+
+.. automodule:: polygon_package.visualization
+   :members:
+
+
+
+
+
+

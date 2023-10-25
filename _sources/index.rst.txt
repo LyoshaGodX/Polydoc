@@ -1,0 +1,13 @@
+====================================
+Добро пожаловать в документацию к Polygon!
+====================================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+
+   installation
+   generation
+   transformation
+   visualization

@@ -1,0 +1,17 @@
+.. _installation:
+
+================
+Установка
+================
+
+Для установки пакета, выполните следующую команду:
+
+.. code-block:: bash
+
+   pip install --index-url https://test.pypi.org/simple/ --no-deps polygon-package
+
+Для установки зависимостей, выполните следующую команду:
+
+.. code-block:: bash
+
+   pip install matplotlib

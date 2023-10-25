@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>polygon_package.transformation &mdash; документация Polygone 0.1</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=490fdf2e"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=29b1f277"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="../../genindex.html" />
+    <link rel="search" title="Поиск" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Polygone
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Установка</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../generation.html">Модуль generation.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transformation.html">Модуль transformation.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualization.html">Модуль visualization.py</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Polygone</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Код модуля</a></li>
+      <li class="breadcrumb-item active">polygon_package.transformation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Исходный код polygon_package.transformation</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">math</span>
+
+
+<div class="viewcode-block" id="multiply_matrices">
+<a class="viewcode-back" href="../../transformation.html#polygon_package.transformation.multiply_matrices">[документация]</a>
+<span class="k">def</span> <span class="nf">multiply_matrices</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Умножает матрицу вершин на матрицу преобразования и возвращает новую матрицу вершин.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    ----------</span>
+<span class="sd">    matrix1 : list of tuple</span>
+<span class="sd">        Матрица вершин, представленная списком кортежей с координатами точек.</span>
+<span class="sd">        Каждый кортеж содержит два значения (x, y) для координаты точки.</span>
+
+<span class="sd">    matrix2 : list of list</span>
+<span class="sd">        Матрица преобразования 2x2, представленная списком списков.</span>
+<span class="sd">        Матрица должна иметь форму [[a, b], [c, d]].</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    --------</span>
+<span class="sd">    list of tuple</span>
+<span class="sd">        Новая матрица вершин, представленная списком кортежей с координатами точек.</span>
+<span class="sd">        Каждый кортеж содержит два значения (x, y) для координаты точки.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">    ------</span>
+<span class="sd">    Функция выполняет умножение матрицы вершин `matrix1` на матрицу преобразования `matrix2`.</span>
+<span class="sd">    Это применяется для преобразования координат точек с использованием матричных операций.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">    ---------</span>
+<span class="sd">    &gt;&gt;&gt; matrix1 = [(1, 2), (3, 4), (5, 6)]</span>
+<span class="sd">    &gt;&gt;&gt; matrix2 = [[2, 0], [0, 3]]</span>
+<span class="sd">    &gt;&gt;&gt; result = multiply_matrices(matrix1, matrix2)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">matrix1</span><span class="p">:</span>
+        <span class="n">x_result</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix2</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">y_result</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix2</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x_result</span><span class="p">,</span> <span class="n">y_result</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+
+<div class="viewcode-block" id="scaling_polygon">
+<a class="viewcode-back" href="../../transformation.html#polygon_package.transformation.scaling_polygon">[документация]</a>
+<span class="k">def</span> <span class="nf">scaling_polygon</span><span class="p">(</span><span class="n">polygon</span><span class="p">,</span> <span class="n">scale_x</span><span class="p">,</span> <span class="n">scale_y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Масштабирует многоугольник по осям X и Y и возвращает новый многоугольник.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    ----------</span>
+<span class="sd">    polygon : list of tuple</span>
+<span class="sd">        Список кортежей с координатами вершин многоугольника.</span>
+<span class="sd">        Каждый кортеж содержит два значения (x, y) для координаты точки.</span>
+
+<span class="sd">    scale_x : float</span>
+<span class="sd">        Коэффициент масштабирования по оси X.</span>
+
+<span class="sd">    scale_y : float</span>
+<span class="sd">        Коэффициент масштабирования по оси Y.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    --------</span>
+<span class="sd">    list of tuple</span>
+<span class="sd">        Новый многоугольник, представленный списком кортежей с координатами вершин.</span>
+<span class="sd">        Каждый кортеж содержит два значения (x, y) для координаты точки.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">    ------</span>
+<span class="sd">    Функция выполняет масштабирование многоугольника по осям X и Y с использованием коэффициентов</span>
+<span class="sd">    масштабирования `scale_x` и `scale_y`. Масштабирование осуществляется путем умножения координат</span>
+<span class="sd">    вершин на соответствующие коэффициенты масштабирования.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">    ---------</span>
+<span class="sd">    &gt;&gt;&gt; polygon = [(1, 2), (3, 4), (5, 6)]</span>
+<span class="sd">    &gt;&gt;&gt; scaled_polygon = scaling_polygon(polygon, 2, 3)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">scaling_matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="n">scale_x</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale_y</span><span class="p">]]</span>
+
+    <span class="k">return</span> <span class="n">multiply_matrices</span><span class="p">(</span><span class="n">polygon</span><span class="p">,</span> <span class="n">scaling_matrix</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="translate_polygon">
+<a class="viewcode-back" href="../../transformation.html#polygon_package.transformation.translate_polygon">[документация]</a>
+<span class="k">def</span> <span class="nf">translate_polygon</span><span class="p">(</span><span class="n">polygon</span><span class="p">,</span> <span class="n">translate_x</span><span class="p">,</span> <span class="n">translate_y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Сдвигает многоугольник на заданное расстояние по осям X и Y и возвращает новый многоугольник.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    ----------</span>
+<span class="sd">    polygon : list of tuple</span>
+<span class="sd">        Список кортежей с координатами вершин многоугольника.</span>
+<span class="sd">        Каждый кортеж содержит два значения (x, y) для координаты точки.</span>
+
+<span class="sd">    translate_x : float</span>
+<span class="sd">        Расстояние смещения по оси X.</span>
+
+<span class="sd">    translate_y : float</span>
+<span class="sd">        Расстояние смещения по оси Y.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    --------</span>
+<span class="sd">    list of tuple</span>
+<span class="sd">        Новый многоугольник, представленный списком кортежей с координатами вершин.</span>
+<span class="sd">        Каждый кортеж содержит два значения (x, y) для координаты точки.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">    ------</span>
+<span class="sd">    Функция выполняет смещение многоугольника на заданные расстояния `translate_x` и `translate_y`</span>
+<span class="sd">    по осям X и Y соответственно. Смещение осуществляется путем прибавления расстояний к координатам вершин.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">    ---------</span>
+<span class="sd">    &gt;&gt;&gt; polygon = [(1, 2), (3, 4), (5, 6)]</span>
+<span class="sd">    &gt;&gt;&gt; translated_polygon = translate_polygon(polygon, 2, 3)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">translated_polygon</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">polygon</span><span class="p">:</span>
+        <span class="n">new_x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">translate_x</span>
+        <span class="n">new_y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">translate_y</span>
+        <span class="n">translated_polygon</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">translated_polygon</span></div>
+
+
+
+<div class="viewcode-block" id="rotate_polygon">
+<a class="viewcode-back" href="../../transformation.html#polygon_package.transformation.rotate_polygon">[документация]</a>
+<span class="k">def</span> <span class="nf">rotate_polygon</span><span class="p">(</span><span class="n">polygon</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">clockwise</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Поворачивает многоугольник на заданный угол относительно начала координат и возвращает новый многоугольник.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    ----------</span>
+<span class="sd">    polygon : list of tuple</span>
+<span class="sd">        Список кортежей с координатами вершин многоугольника.</span>
+<span class="sd">        Каждый кортеж содержит два значения (x, y) для координаты точки.</span>
+
+<span class="sd">    angle : float</span>
+<span class="sd">        Угол поворота в градусах.</span>
+
+<span class="sd">    clockwise : bool, optional</span>
+<span class="sd">        Определяет направление поворота (по часовой стрелке или против часовой стрелки).</span>
+<span class="sd">        По умолчанию установлено значение True, что соответствует повороту по часовой стрелке.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    --------</span>
+<span class="sd">    list of tuple</span>
+<span class="sd">        Новый многоугольник, представленный списком кортежей с координатами вершин.</span>
+<span class="sd">        Каждый кортеж содержит два значения (x, y) для координаты точки.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">    ------</span>
+<span class="sd">    Функция выполняет поворот многоугольника на указанный угол `angle` в градусах относительно начала координат.</span>
+<span class="sd">    Направление поворота (по часовой стрелке или против часовой стрелки) задается параметром `clockwise`.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">    ---------</span>
+<span class="sd">    &gt;&gt;&gt; polygon = [(1, 2), (3, 4), (5, 6)]</span>
+<span class="sd">    &gt;&gt;&gt; rotated_polygon = rotate_polygon(polygon, 45, clockwise=False)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">angle_rad</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">clockwise</span><span class="p">:</span>
+        <span class="n">rotation_matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">),</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">)],</span>
+                           <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">)]]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rotation_matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">)],</span>
+                           <span class="p">[</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">)]]</span>
+
+    <span class="k">return</span> <span class="n">multiply_matrices</span><span class="p">(</span><span class="n">polygon</span><span class="p">,</span> <span class="n">rotation_matrix</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2023, Leha. </p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
